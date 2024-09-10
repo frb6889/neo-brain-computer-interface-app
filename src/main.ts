@@ -11,8 +11,17 @@ if (require("electron-squirrel-startup")) {
 function createWindow() {
     const preload = path.join(__dirname, "preload.js");
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 700,
+        height: 750,
+        fullscreen: true,
+    fullscreenable: false,
+    frame: false,
+    skipTaskbar: false,
+    resizable: false,
+    movable: true,
+    
+    alwaysOnTop: false,
+    transparent: true,
         webPreferences: {
             devTools: inDevelopment,
             contextIsolation: true,
@@ -21,7 +30,7 @@ function createWindow() {
 
             preload: preload,
         },
-        titleBarStyle: "hidden",
+        /* titleBarStyle: "hidden", */
     });
     registerListeners(mainWindow);
 
@@ -48,4 +57,7 @@ app.on("activate", () => {
         createWindow();
     }
 });
+
+
+
 //osX only ends
