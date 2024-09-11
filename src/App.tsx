@@ -14,7 +14,7 @@ export default function App() {
         syncThemeWithLocal();
         updateAppLanguage(i18n);
 
-        // 预加载图片
+        // 预加载
         buttons.forEach(button => {
             const img = new Image();
             img.src = button.image;
@@ -26,12 +26,12 @@ export default function App() {
 
 
     const buttons = [
-        { deg: 0, name: "训练", icon: <Crosshair1Icon className="w-[40px] h-[40px]" />, image: "../images/choosed2.png" },
-        { deg: 60, name: "切换语言", icon: <GlobeIcon className="w-[40px] h-[40px]" />, image: "../images/choosed3.png" },
-        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[40px] h-[40px]" />, image: "../images/choosed4.png" },
-        { deg: 180, name: "设置", icon: <GearIcon className="w-[40px] h-[40px]" />, image: "../images/choosed5.png" },
-        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[40px] h-[40px]" />, image: "../images/choosed6.png" },
-        { deg: 300, name: "校准", icon: <TargetIcon className="w-[40px] h-[40px]" />, image: "../images/choosed1.png" },
+        { deg: 0, name: "训练", icon: <Crosshair1Icon className="w-[50px] h-[50px]" />, image: "../images/choosed2.png" },
+        { deg: 60, name: "切换语言", icon: <GlobeIcon className="w-[50px] h-[50px]" />, image: "../images/choosed3.png" },
+        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[50px] h-[50px]" />, image: "../images/choosed4.png" },
+        { deg: 180, name: "设置", icon: <GearIcon className="w-[50px] h-[50px]" />, image: "../images/choosed5.png" },
+        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[50px] h-[50px]" />, image: "../images/choosed6.png" },
+        { deg: 300, name: "校准", icon: <TargetIcon className="w-[50px] h-[50px]" />, image: "../images/choosed1.png" },
     ];
 
 
@@ -82,14 +82,14 @@ export default function App() {
                 {/* 大圆 */}
                 <img src="../images/bigcircle.png" className="relative w-[690px] h-[690px] rounded-full flex justify-center items-center border-b border-border/40 shadow-xl z-1" />
 
-                {/* 根据hover状态显示对应的图片 */}
+                {/* 大圆hover效果 */}
                 {buttons.map((btn, index) => (
                     <img
                         src={btn.image}
                         className="absolute w-[690px] h-[690px] flex justify-center items-center z-12"
                         style={{
-                            opacity: hoveredButton === index ? 0.4 : 0, // 控制透明度，hover时为1，非hover时为0
-                            transition: 'opacity 0.2s ease-in-out',  // 添加透明度渐变效果
+                            opacity: hoveredButton === index ? 0.4 : 0, // 控制透明度
+                            transition: 'opacity 0.2s ease-in-out',  // 透明度渐变
                         }}
                     />
                 ))}
@@ -112,7 +112,7 @@ export default function App() {
                         variant="link"
                         className="absolute flex flex-col justify-center items-center w-[250px] h-[250px] text-black/75 rounded-full"
                         style={{
-                            transform: `rotate(${btn.deg}deg) translate(230px) rotate(-${btn.deg}deg)`, // 按钮围绕中心旋转并位移
+                            transform: `rotate(${btn.deg}deg) translate(230px) rotate(-${btn.deg}deg)`, // 按钮的旋转和位移
                             transformOrigin: 'center'  // 使按钮围绕圆心旋转
                         }}
                         // 当鼠标进入时设置hover状态
@@ -121,7 +121,7 @@ export default function App() {
                         onMouseLeave={() => setHoveredButton(null)}
                     >
                         {btn.icon} {/* 上方图标 */}
-                        <span className="text-sm mt-2">{btn.name}</span> {/* 下方文字 */}
+                        <span className="text-md mt-2">{btn.name}</span> {/* 下方文字 */}
                     </button>
                 ))}
 
@@ -131,7 +131,7 @@ export default function App() {
                         key={index}
                         className="absolute w-[1px] h-[150px] bg-gray-200"
                         style={{
-                            transform: `rotate(${btn.deg}deg) translate(0px) translateY(230px)`, // 旋转并使线条位于按钮之间
+                            transform: `rotate(${btn.deg}deg) translate(0px) translateY(230px)`, // 旋转
                             transformOrigin: 'center', // 以圆心为基准旋转
                         }}
                     ></div>
