@@ -88,7 +88,7 @@ export default function App() {
                         src={btn.image}
                         className="absolute w-[690px] h-[690px] flex justify-center items-center z-12"
                         style={{
-                            opacity: hoveredButton === index ? 0.4 : 0, // 控制透明度
+                            opacity: hoveredButton === index ? 0.8 : 0, // 控制透明度
                             transition: 'opacity 0.2s ease-in-out',  // 透明度渐变
                         }}
                     />
@@ -121,7 +121,7 @@ export default function App() {
                         onMouseLeave={() => setHoveredButton(null)}
                     >
                         {btn.icon} {/* 上方图标 */}
-                        <span className="text-md mt-2">{btn.name}</span> {/* 下方文字 */}
+                        <span className="text-lg mt-2">{btn.name}</span> {/* 下方文字 */}
                     </button>
                 ))}
 
