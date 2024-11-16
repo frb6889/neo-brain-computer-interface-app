@@ -26,12 +26,12 @@ export default function App() {
 
 
     const buttons = [
-        { deg: 0, name: "训练", icon: <Crosshair1Icon className="w-[50px] h-[50px]" />, image: "../images/choosed2.png" },
-        { deg: 60, name: "切换语言", icon: <GlobeIcon className="w-[50px] h-[50px]" />, image: "../images/choosed3.png" },
-        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[50px] h-[50px]" />, image: "../images/choosed4.png" },
-        { deg: 180, name: "设置", icon: <GearIcon className="w-[50px] h-[50px]" />, image: "../images/choosed5.png" },
-        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[50px] h-[50px]" />, image: "../images/choosed6.png" },
-        { deg: 300, name: "校准", icon: <TargetIcon className="w-[50px] h-[50px]" />, image: "../images/choosed1.png" },
+        { deg: 0, name: "训练", icon: <img src="../images/training-icon.png" className="w-[50px]"/>, image: "../images/choosed2.png" },
+        { deg: 60, name: "用户", icon: <img src="../images/user-icon.png" className="w-[50px]"/>, image: "../images/choosed3.png" },
+        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[45px] h-[45px]" />, image: "../images/choosed4.png" },
+        { deg: 180, name: "交互操作", icon: <img src="../images/mouse-icon.png" className="w-[50px]"/>, image: "../images/choosed5.png" },
+        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[45px] h-[45px]" />, image: "../images/choosed6.png" },
+        { deg: 300, name: "校准", icon: <TargetIcon className="w-[45px] h-[45px]" />, image: "../images/choosed1.png" },
     ];
 
 
@@ -80,27 +80,35 @@ export default function App() {
             </div>
             <div className="relative w-[700px] h-[700px] rounded-full flex justify-center items-center">
                 {/* 大圆 */}
-                <img src="../images/bigcircle.png" className="relative w-[690px] h-[690px] rounded-full flex justify-center items-center border-b border-border/40 shadow-xl z-1" />
+                <img src="../images/bigcircle.png" className="relative w-[690px] h-[690px] rounded-ful
+                flex justify-center items-center opacity-[45%] z-10" />
+                <img src="../images/bigcircle-stroke.png" className="w-[690px] h-[690px] rounded-ful
+                fixed opacity-75 z-20" />
+                <div className="blur-lg z-20
+                fixed bg-black/20 w-[690px] h-[690px] rounded-full backdrop-blur-xl"
+                style={{
+                    clipPath: "circle(50% at center)"
+                  }}
+                ></div>
 
                 {/* 大圆hover效果 */}
                 {buttons.map((btn, index) => (
                     <img
                         src={btn.image}
-                        className="absolute w-[690px] h-[690px] flex justify-center items-center z-12"
+                        className="absolute w-[690px] h-[690px] flex justify-center items-center z-30"
                         style={{
-                            opacity: hoveredButton === index ? 0.8 : 0, // 控制透明度
+                            opacity: hoveredButton === index ? 0.25 : 0, // 控制透明度
                             transition: 'opacity 0.2s ease-in-out',  // 透明度渐变
                         }}
                     />
                 ))}
 
                 {/* 镂空的小圆 */}
-                <div className="absolute w-[180px] h-[180px] bg-zinc-800/80 rounded-full shadow-inner"></div>
-
+                
                 {/* 中心的黑色球 */}
                 <img
                     src="../images/lightdot.png"
-                    className="absolute w-[100px] h-[100px] justify-center items-center rounded-full z-11 shadow-lg"
+                    className="absolute w-[120px] h-[120px] justify-center items-center rounded-full z-40 shadow-lg"
                     alt="draggable-dot"
                     style={{ WebkitAppRegion: 'drag' }}
                 />
@@ -110,8 +118,11 @@ export default function App() {
                     <button
                         key={index}
                         variant="link"
-                        className="absolute flex flex-col justify-center items-center w-[250px] h-[250px] text-black/75 rounded-full"
+                        className="z-40 text-slate-50
+                        absolute flex flex-col justify-center items-center w-[250px] h-[250px] text-black/75 rounded-full"
                         style={{
+                            opacity: hoveredButton === index ? 1 : 0.65, // 控制透明度
+                            transition: 'opacity 0.2s ease-in-out',
                             transform: `rotate(${btn.deg}deg) translate(230px) rotate(-${btn.deg}deg)`, // 按钮的旋转和位移
                             transformOrigin: 'center'  // 使按钮围绕圆心旋转
                         }}
@@ -121,7 +132,7 @@ export default function App() {
                         onMouseLeave={() => setHoveredButton(null)}
                     >
                         {btn.icon} {/* 上方图标 */}
-                        <span className="text-lg mt-2">{btn.name}</span> {/* 下方文字 */}
+                        <span className="text-[14px] mt-2 text-gray-300/80 font-regular ">{btn.name}</span> {/* 下方文字 */}
                     </button>
                 ))}
 
@@ -129,7 +140,7 @@ export default function App() {
                 {buttons.map((btn, index) => (
                     <div
                         key={index}
-                        className="absolute w-[1px] h-[150px] bg-gray-200"
+                        className="absolute w-[1px] h-[150px] bg-gray-700/30"
                         style={{
                             transform: `rotate(${btn.deg}deg) translate(0px) translateY(230px)`, // 旋转
                             transformOrigin: 'center', // 以圆心为基准旋转
