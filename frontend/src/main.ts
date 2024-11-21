@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow,ipcMain } from "electron";
+
 import registerListeners from "./helpers/ipc/listeners-register";
 import path from "path";
 
@@ -8,12 +9,12 @@ if (require("electron-squirrel-startup")) {
     app.quit();
 }
 
-function createWindow() {
+function createWindow(options={width: 700, height: 750, fullscreen: false}) {
     const preload = path.join(__dirname, "preload.js");
     const mainWindow = new BrowserWindow({
-        width: 700,
-        height: 750,
-        fullscreen: true,
+        width: options.width,
+        height: options.height,
+        fullscreen: options.fullscreen,/*  */
     fullscreenable: false,
     frame: false,
     skipTaskbar: false,
@@ -22,6 +23,7 @@ function createWindow() {
     
     alwaysOnTop: false,
     transparent: true,
+    hasShadow: false, 
         webPreferences: {
             devTools: inDevelopment,
             contextIsolation: true,
@@ -43,7 +45,7 @@ function createWindow() {
     }
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(()=>createWindow);
 
 //osX only
 app.on("window-all-closed", () => {

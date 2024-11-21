@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { ipcRenderer } from "electron";
 
 import { createRoot } from "react-dom/client";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
-import "../localization/i18n";
-import { syncThemeWithLocal } from "../helpers/theme_helpers";
-import { updateAppLanguage } from "../helpers/language_helpers";
+import "./localization/i18n";
+import { syncThemeWithLocal } from "./helpers/theme_helpers";
+import { updateAppLanguage } from "./helpers/language_helpers";
 import { Crosshair1Icon, GearIcon, TargetIcon, GlobeIcon, MinusIcon, Cross2Icon } from "@radix-ui/react-icons";
 
-//router
-import { useNavigate } from "react-router-dom";
 
-export default function HomePage() {
+export default function App() {
     const { i18n } = useTranslation();
-    const navigate = useNavigate();
 
     useEffect(() => {
         syncThemeWithLocal();
@@ -35,12 +33,12 @@ export default function HomePage() {
 
 
     const buttons = [
-        { deg: 0, name: "训练", icon: <img src="../images/training-icon.png" className="w-[50px]"/>, image: "../images/choosed2.png", route: "/training" },
-        { deg: 60, name: "用户", icon: <img src="../images/user-icon.png" className="w-[50px]"/>, image: "../images/choosed3.png", route: null },
-        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[45px] h-[45px]" />, image: "../images/choosed4.png", route: null },
-        { deg: 180, name: "交互操作", icon: <img src="../images/mouse-icon.png" className="w-[50px]"/>, image: "../images/choosed5.png", route: null },
-        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[45px] h-[45px]" />, image: "../images/choosed6.png", route: null },
-        { deg: 300, name: "校准", icon: <TargetIcon className="w-[45px] h-[45px]" />, image: "../images/choosed1.png", route: null },
+        { deg: 0, name: "训练", icon: <img src="../images/training-icon.png" className="w-[50px]"/>, image: "../images/choosed2.png" },
+        { deg: 60, name: "用户", icon: <img src="../images/user-icon.png" className="w-[50px]"/>, image: "../images/choosed3.png" },
+        { deg: 120, name: "关闭", icon: <Cross2Icon className="w-[45px] h-[45px]" />, image: "../images/choosed4.png" },
+        { deg: 180, name: "交互操作", icon: <img src="../images/mouse-icon.png" className="w-[50px]"/>, image: "../images/choosed5.png" },
+        { deg: 240, name: "最小化", icon: <MinusIcon className="w-[45px] h-[45px]" />, image: "../images/choosed6.png" },
+        { deg: 300, name: "校准", icon: <TargetIcon className="w-[45px] h-[45px]" />, image: "../images/choosed1.png" },
     ];
 
 
@@ -139,13 +137,6 @@ export default function HomePage() {
                         onMouseEnter={() => setHoveredButton(index)}
                         // 当鼠标离开时重置hover状态
                         onMouseLeave={() => setHoveredButton(null)}
-                        onClick={()=>{
-                            if(btn.route){
-                                navigate(btn.route);
-                            }else{
-                                console.log(`${btn.name} 无跳转逻辑`);
-                            }
-                        }}
 
                         /* onClick={index === 0 ? handleTrainingClick : undefined} */
                     >
@@ -169,3 +160,6 @@ export default function HomePage() {
         </div>
     );
 }
+
+const root = createRoot(document.getElementById("app")!);
+root.render(<App />);
