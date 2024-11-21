@@ -5,8 +5,10 @@
 #### Development notes:
 **11.16:**
 menu redesigned
+**11.21**
+add router effect
 
-**11.17:**
+**TODO:**
 calibration page - for experiments
 training page.
 
